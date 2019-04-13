@@ -102,7 +102,11 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
     NSString* sip = [@"sip:" stringByAppendingString:[[username stringByAppendingString:@"@"] stringByAppendingString:domain]];
     loginCallBackID = command.callbackId;
     char* identity = (char*)[sip UTF8String];
+        
 
+ 
+       
+        
     if (lc == NULL) {
         LinphoneCoreVTable vtable = {0};
         
@@ -134,7 +138,7 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
     
     // configure proxy entries
     linphone_proxy_config_set_identity(proxy_cfg,identity); /*set identity with user name and domain*/
-    const char* server_addr = linphone_address_get_domain(from); /*extract domain address from identity*/
+    const char* server_addr = (char*)[domain UTF8String]; /*extract domain address from identity*/
     linphone_proxy_config_set_server_addr(proxy_cfg,server_addr); /* we assume domain = proxy server address*/
     linphone_proxy_config_enable_register(proxy_cfg,TRUE); /*activate registration for this proxy config*/
     linphone_address_destroy(from); /*release resource*/
