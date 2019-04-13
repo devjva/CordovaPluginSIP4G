@@ -51,6 +51,10 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
     if(cstate == LinphoneCallConnected){
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connected"];
         [himself.commandDelegate sendPluginResult:pluginResult callbackId:callCallBackID];
+		
+		UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
+        AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride),
+                                &audioRouteOverride);
     }
     if(cstate == LinphoneCallEnd){
         
@@ -58,9 +62,7 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"End"];
         [himself.commandDelegate sendPluginResult:pluginResult callbackId:callCallBackID];
         isspeaker = FALSE;
-        UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
-        AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride),
-                                &audioRouteOverride);
+       
         
     }
     if(cstate == LinphoneCallIncomingReceived){
