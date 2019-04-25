@@ -199,7 +199,7 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
                 LinphoneCallParams params = mLinphoneCore.createCallParams(mLinphoneCore.getCurrentCall());
                 params.setVideoEnabled(false);
                 mLinphoneCore.inviteAddressWithParams(lAddress, params);
-				disableSpeaker();
+				///etc...				
             } catch (LinphoneCoreException var7) {
                 return;
             }
@@ -233,12 +233,7 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
         return false;
     }
 	
-	public boolean disableSpeaker() {
-        if (mLinphoneCore.isIncall()) {			
-			mLinphoneCore.enableSpeaker(false);            
-        }
-        return false;
-    }
+
 
     public boolean toggleMute() {
         if (mLinphoneCore.isIncall()) {
