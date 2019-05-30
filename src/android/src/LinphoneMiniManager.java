@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.view.SurfaceView;
-
+import android.media.AudioManager;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.linphone.core.LinphoneAddress;
