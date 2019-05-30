@@ -63,9 +63,7 @@ import java.util.TimerTask;
  * @author Sylvain Berfini
  */
 public class LinphoneMiniManager implements LinphoneCoreListener {
-	final static int FOR_MEDIA = 1;
-	final static int FORCE_NONE = 0;
-	final static int FORCE_SPEAKER = 1;
+	
 	public static LinphoneMiniManager mInstance;
 	public static Context mContext;
 	public static LinphoneCore mLinphoneCore;
@@ -229,20 +227,17 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 
     public boolean toggleEnableSpeaker() {
     
-
+AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         if (mLinphoneCore.isIncall()) {
 		
 			boolean enabled = !mLinphoneCore.isSpeakerEnabled();
 			mLinphoneCore.enableSpeaker(enabled);
-		
+		 audioManager.setSpeakerphoneOn(isOn);
 		
             return enabled;
         }
 	    
-Class audioSystemClass = Class.forName("android.media.AudioSystem");
-Method setForceUse = audioSystemClass.getMethod("setForceUse", int.class, int.class);
-setForceUse.invoke(null, FOR_MEDIA, FORCE_SPEAKER);
-// To get back to the default behaviour, use the combination FOR_MEDIA,FORCE_NONE.
+ audioManager.setSpeakerphoneOn(isOn);
   
 	    
         return false;
