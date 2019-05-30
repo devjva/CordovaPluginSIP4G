@@ -225,9 +225,15 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
     }
 
     public boolean toggleEnableSpeaker() {
+    
+AudioManager audioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
+ audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+	    
         if (mLinphoneCore.isIncall()) {
+		
 			boolean enabled = !mLinphoneCore.isSpeakerEnabled();
 			mLinphoneCore.enableSpeaker(enabled);
+		audioManager.setSpeakerphoneOn(true);  
             return enabled;
         }
         return false;
