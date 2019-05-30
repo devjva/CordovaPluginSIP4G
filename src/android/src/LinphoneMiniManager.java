@@ -232,12 +232,12 @@ AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO
 		
 			boolean enabled = !mLinphoneCore.isSpeakerEnabled();
 			mLinphoneCore.enableSpeaker(enabled);
-		 audioManager.setSpeakerphoneOn(isOn);
+		 audioManager.setSpeakerphoneOn(true);
 		
             return enabled;
         }
 	    
- audioManager.setSpeakerphoneOn(isOn);
+ audioManager.setSpeakerphoneOn(true);
   
 	    
         return false;
