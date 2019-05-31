@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.view.SurfaceView;
-import android.media.AudioManager;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.linphone.core.LinphoneAddress;
@@ -227,17 +227,17 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 
     public boolean toggleEnableSpeaker() {
     
-AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+
         if (mLinphoneCore.isIncall()) {
 		
 			boolean enabled = !mLinphoneCore.isSpeakerEnabled();
 			mLinphoneCore.enableSpeaker(enabled);
-		 audioManager.setSpeakerphoneOn(true);
+		
 		
             return enabled;
         }
 	    
- audioManager.setSpeakerphoneOn(true);
+ 
   
 	    
         return false;
