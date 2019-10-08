@@ -98,5 +98,14 @@ module.exports =
             "sendDtmf",
             [number]
         );
+    },
+    updateRegister: function (number, successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            "Linphone",
+            "updateRegister",
+            [number]
+        );
     }
 };
