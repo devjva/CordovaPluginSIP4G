@@ -199,6 +199,20 @@ public class Linphone extends CordovaPlugin {
    });
    return true;
   }
+  else if (action.equals("updateRegister")) {
+
+   cordova.getThreadPool().execute(new Runnable() {
+    public void run() {
+     try {
+      updateRegister(args.getString(0), callbackContext);
+
+     } catch (Exception e) {
+      Log.d("login error", e.getMessage());
+     }
+    }
+   });
+   return true;
+  }
   return false;
  }
 
@@ -310,10 +324,20 @@ public class Linphone extends CordovaPlugin {
   try {
    Log.d("sendDtmf");
    mLinphoneManager.sendDtmf(number.charAt(0));
-   Log.d("sendDtmf sukses", number);
    callbackContext.success();
   } catch (Exception e) {
    Log.d("sendDtmf error", e.getMessage());
+   callbackContext.error(e.getMessage());
+  }
+ }
+
+ public static synchronized void updateRegister(final CallbackContext callbackContext) {
+  try {
+   Log.d("Update Register");
+   mLinphoneManager.refreshRegisters();
+   callbackContext.success();
+  } catch (Exception e) {
+   Log.d("Update Error", e.getMessage());
    callbackContext.error(e.getMessage());
   }
  }
