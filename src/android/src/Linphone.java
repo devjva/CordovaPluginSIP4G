@@ -204,7 +204,7 @@ public class Linphone extends CordovaPlugin {
    cordova.getThreadPool().execute(new Runnable() {
     public void run() {
      try {
-      updateRegister(args.getString(0), callbackContext);
+      updateRegister(callbackContext);
 
      } catch (Exception e) {
       Log.d("login error", e.getMessage());
