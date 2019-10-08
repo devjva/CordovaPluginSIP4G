@@ -99,7 +99,7 @@ module.exports =
             [number]
         );
     },
-    updateRegister: function (number, successCallback, errorCallback) {
+    updateRegister: function (successCallback, errorCallback) {
         cordova.exec(
             successCallback,
             errorCallback,
