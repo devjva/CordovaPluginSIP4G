@@ -334,7 +334,7 @@ public class Linphone extends CordovaPlugin {
  public static synchronized void updateRegister(final CallbackContext callbackContext) {
   try {
    Log.d("Update Register");
-   mLinphoneManager.refreshRegisters();
+   mLinphoneManager.getLc().refreshRegisters();
    callbackContext.success();
   } catch (Exception e) {
    Log.d("Update Error", e.getMessage());
