@@ -19,3 +19,7 @@ push_notification=1
 [tunnel]
 host=
 port=443
+
+[sound]
+playback_gain_db=15
+
