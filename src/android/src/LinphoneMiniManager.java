@@ -497,23 +497,7 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
         mCallbackContext = callbackContext;
         LinphoneCall call = mLinphoneCore.getCurrentCall();
         try {
-
-            mLinphoneCore.acceptCall(call);
-			
-			if(isSimSupport()){
-				Log.i("!### chip "+isSimSupport());
-				mLinphoneCore.setMicrophoneGain(new Float("0.1"));
-				mLinphoneCore.setPlaybackGain(new Float("0.2")); 
-			}
-			
-			else{
-				Log.i("!###chip "+isSimSupport());
-				mLinphoneCore.setMicrophoneGain(new Float("-0.2"));
-				mLinphoneCore.setPlaybackGain(new Float("0.2"));
-				mLinphoneCore.enableEchoCancellation(true);
-				mLinphoneCore.enableEchoLimiter(true);
-			}
-
+            mLinphoneCore.acceptCall(call);            
 
         } catch (LinphoneCoreException e) {
             e.printStackTrace();
@@ -522,26 +506,9 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 
     public void call(String address, String displayName, CallbackContext callbackContext) {
 
-
-		mCallbackContext = callbackContext;
-		newOutgoingCall(address, displayName);
-		
-		if(isSimSupport()){
-				Log.i("!### chip "+isSimSupport());
-				mLinphoneCore.setMicrophoneGain(new Float("0.1"));
-				mLinphoneCore.setPlaybackGain(new Float("0.25")); 
-			}
-			
-			else{
-				Log.i("!###chip "+isSimSupport());
-				mLinphoneCore.setMicrophoneGain(new Float("-0.25"));
-				mLinphoneCore.setPlaybackGain(new Float("0.25"));
-				mLinphoneCore.enableEchoCancellation(true);
-				mLinphoneCore.enableEchoLimiter(true);
-			}
-
-	}
-
+        mCallbackContext = callbackContext;
+        newOutgoingCall(address, displayName);
+    
 
     }
 
@@ -572,7 +539,6 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 
 
             LinphoneProxyConfig proxyCfg = mLinphoneCore.createProxyConfig("sip:" + username + "@" + domain, domain, (String) null, true);
-
 
             proxyCfg.enableRegister(true);
             mLinphoneCore.addProxyConfig(proxyCfg);
@@ -610,41 +576,6 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 	
 	
 	
-
-			
-			mLoginCallbackContext = callbackContext;
-
-			/*Transports transports = mLinphoneCore.getSignalingTransportPorts();
-			transports.udp = 9061;
-			transports.tls = -1;
-			transports.tcp = 9060;
-			mLinphoneCore.setSignalingTransportPorts(transports);*/
-
-			//builder.saveNewAccount();
-		} catch (LinphoneCoreException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static boolean isSimSupport()
-    {
-		TelephonyManager tm = (TelephonyManager) 
-        mContext.getSystemService(mContext.TELEPHONY_SERVICE);     
-		String simID = tm.getSimSerialNumber();
-		Log.i("!###chip "+simID);
-		if(simID.length()>0){
-			
-			return true;
-		}else{
-			
-			return false;
-		}
-		
-    }
-	
-	
-}
-
 
 
 }
