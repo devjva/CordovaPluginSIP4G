@@ -3,7 +3,7 @@ Based on https://github.com/sezerkorkmaz/cordova-plugin-sip
 (Now working on mobile network)
 
 
-
+```
 
  var sipManager = {
         register: function () {
@@ -56,3 +56,4 @@ Based on https://github.com/sezerkorkmaz/cordova-plugin-sip
 
         }
     }
+´´´
