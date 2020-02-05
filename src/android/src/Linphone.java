@@ -12,6 +12,10 @@ import org.json.JSONException;
 import org.linphone.core.LinphoneCore;
 import org.linphone.core.LinphoneProxyConfig;
 import org.linphone.mediastream.Log;
+import org.linphone.core.LinphoneCall;
+import org.linphone.core.LinphoneCall.State;
+import org.linphone.core.LinphoneCallParams;
+import org.linphone.core.LinphoneCallStats;
 
 import java.util.Timer;
 
@@ -213,6 +217,20 @@ public class Linphone extends CordovaPlugin {
    });
    return true;
   }
+  else if (action.equals("getRemoteContact")) {
+
+   cordova.getThreadPool().execute(new Runnable() {
+    public void run() {
+     try {
+      getRemoteContact(callbackContext);
+
+     } catch (Exception e) {
+      Log.d("login error", e.getMessage());
+     }
+    }
+   });
+   return true;
+  }
   return false;
  }
 
@@ -336,6 +354,20 @@ public class Linphone extends CordovaPlugin {
    Log.d("Update Register");
    mLinphoneManager.getLc().refreshRegisters();
    callbackContext.success();
+  } catch (Exception e) {
+   Log.d("Update Error", e.getMessage());
+   callbackContext.error(e.getMessage());
+  }
+ }
+ 
+ 
+  public static synchronized void getRemoteContact (final CallbackContext callbackContext) {
+  try {
+   Log.d("Get Remote Contact");
+   LinphoneCall call =  mLinphoneManager.getLc().getCurrentCall();
+   mLinphoneManager.getLc().refreshRegisters();
+   callbackContext.success(call.getRemoteContact());
+   //callbackContext.success();
   } catch (Exception e) {
    Log.d("Update Error", e.getMessage());
    callbackContext.error(e.getMessage());
