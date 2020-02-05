@@ -7,7 +7,7 @@ Based on https://github.com/sezerkorkmaz/cordova-plugin-sip
 
  var sipManager = {
         register: function () {
-            cordova.plugins.sip.login('203' /*Extension*/, '203' /*Password*/, '192.168.1.111:5060'/*IP Address:Port*/, function (e) {
+            cordova.plugins.sip.login('Extension', 'Password', 'IP Address:Port', function (e) {
 
                 if (e == 'RegistrationSuccess') {
                     console.log(e);
