@@ -5,7 +5,7 @@ Now working on mobile network*
 
 
 
-' var sipManager = {
+ ```var sipManager = {
         register: function () {
             cordova.plugins.sip.login('203' /*Extension*/, '203' /*Password*/, '192.168.1.111:5060'/*IP Address:Port*/, function (e) {
 
@@ -55,4 +55,4 @@ Now working on mobile network*
 
 
         }
-    }'
+    }
