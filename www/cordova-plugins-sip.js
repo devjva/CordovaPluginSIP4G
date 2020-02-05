@@ -1,3 +1,4 @@
+cordova.define("cordova-plugin-sip.linphone", function(require, exports, module) {
 module.exports =
 {
     login: function (username, password, domain, successCallback, errorCallback) {
@@ -107,5 +108,16 @@ module.exports =
             "updateRegister",
             []
         );
+    },
+    getRemoteContact: function (successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            "Linphone",
+            "getRemoteContact",
+            []
+        );
     }
 };
+
+});
