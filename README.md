@@ -27,8 +27,11 @@ Based on https://github.com/sezerkorkmaz/cordova-plugin-sip
         hangup: function () {
             cordova.plugins.sip.hangup(function (e) { console.log(e) }, function (e) { console.log(e) })
         },
-		    updateRegister: function () {			
+		updateRegister: function () {			
             cordova.plugins.sip.updateRegister(function (e) { console.log(e) }, function (e) { console.log(e) })
+        },
+		getRemoteContact: function () {			
+           return cordova.plugins.sip.getRemoteContact(function (e) { return(e) }, function (e) { return.log(e) })
         },
         events: function (e) {
             console.log(e);
