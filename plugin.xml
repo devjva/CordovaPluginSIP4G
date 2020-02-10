@@ -50,6 +50,8 @@
       <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
       <uses-permission android:name="android.permission.WAKE_LOCK" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	  <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+      <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <activity android:name="com.sip.linphone.LinphoneMiniActivity" android:theme="@android:style/Theme.Black.NoTitleBar" />
