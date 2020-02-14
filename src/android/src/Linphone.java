@@ -365,7 +365,7 @@ public class Linphone extends CordovaPlugin {
   try {
    Log.d("Get Remote Contact");
    LinphoneCall call =  mLinphoneManager.getLc().getCurrentCall();   
-   callbackContext.success(call.getRemoteContact());   
+   callbackContext.success(call.getRemoteContact().split("@")[0].split(":")[1]);   
   } catch (Exception e) {
    Log.d("Update Error", e.getMessage());
 	callbackContext.success('0');
