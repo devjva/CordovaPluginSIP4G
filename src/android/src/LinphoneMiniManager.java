@@ -52,6 +52,7 @@ import org.linphone.core.SubscriptionState;
 import org.linphone.mediastream.Log;
 import org.linphone.mediastream.video.capture.hwconf.AndroidCameraConfiguration;
 import org.linphone.mediastream.video.capture.hwconf.AndroidCameraConfiguration.AndroidCamera;
+import org.linphone.core.LinphoneCore.Transports;
 
 import java.io.File;
 import java.io.IOException;
@@ -505,14 +506,17 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 
 	public void login(String username, String password, String domain, CallbackContext callbackContext) {
 		try {
-		//LinphoneAddress address = LinphoneCoreFactory.instance().createLinphoneAddress("sip:" + username + "@" + domain);
 
 
+		Transports transports = getLc().getSignalingTransportPorts();
+			
+			transports.udp = 0;
+			transports.tls = 0;
+			transports.tcp = 5090;
+			getLc().setSignalingTransportPorts(transports);
+			
+			
 
-//		LinphonePreferences.AccountBuilder builder = new LinphonePreferences.AccountBuilder(getLc())
-//				.setUsername(username)
-//				.setDomain(domain)
-//				.setPassword(password);
 		Log.i("Endereço login url -> sip " + "sip:" + username + "@" + domain);
 			LinphoneCoreFactory lcFactory = LinphoneCoreFactory.instance();
 
