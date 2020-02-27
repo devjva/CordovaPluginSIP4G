@@ -21,5 +21,7 @@
 - (void)toggleSpeaker:(CDVInvokedUrlCommand*)command;
 - (void)toggleMute:(CDVInvokedUrlCommand*)command;
 - (void)sendDtmf:(CDVInvokedUrlCommand*)command;
+- (void)userNameFromCurrentCall:(CDVInvokedUrlCommand*)command;
+
 
 @end
