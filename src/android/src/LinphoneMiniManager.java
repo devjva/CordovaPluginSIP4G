@@ -507,16 +507,7 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 	public void login(String username, String password, String domain, CallbackContext callbackContext) {
 		try {
 
-
-		Transports transports = getLc().getSignalingTransportPorts();
-			
-			transports.udp = 0;
-			transports.tls = 0;
-			transports.tcp = 5090;
-			getLc().setSignalingTransportPorts(transports);
-			
-			
-
+		
 		Log.i("Endereço login url -> sip " + "sip:" + username + "@" + domain);
 			LinphoneCoreFactory lcFactory = LinphoneCoreFactory.instance();
 
