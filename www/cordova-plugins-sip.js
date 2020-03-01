@@ -1,12 +1,12 @@
 module.exports =
 {
-    login: function (username, password, domain, successCallback, errorCallback) {
+    login: function (username, password, domain, transport, successCallback, errorCallback) {
         cordova.exec(
             successCallback,
             errorCallback,
             "Linphone",
             "login",
-            [username, password, domain]
+            [username, password, domain, transport]
         );
     },
     logout: function (successCallback, errorCallback) {
@@ -105,6 +105,15 @@ module.exports =
             errorCallback,
             "Linphone",
             "updateRegister",
+            []
+        );
+    },
+    getRemoteContact: function (successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            "Linphone",
+            "getRemoteContact",
             []
         );
     }
