@@ -13,6 +13,12 @@ import org.linphone.core.LinphoneCore;
 import org.linphone.core.LinphoneProxyConfig;
 import org.linphone.mediastream.Log;
 
+import org.linphone.core.LinphoneCall;
+import org.linphone.core.LinphoneCall.State;
+import org.linphone.core.LinphoneCallParams;
+import org.linphone.core.LinphoneCallStats;
+import org.linphone.core.LinphoneCore.Transports;
+
 import java.util.Timer;
 
 public class Linphone extends CordovaPlugin {
@@ -39,8 +45,9 @@ public class Linphone extends CordovaPlugin {
   if (action.equals("login")) {
    cordova.getThreadPool().execute(new Runnable() {
     public void run() {
-     try {
-      login(args.getString(0), args.getString(1), args.getString(2), callbackContext);
+     try { 	 
+		 
+      login(args.getString(0), args.getString(1), args.getString(2), args.getString(3), callbackContext);
 
      } catch (Exception e) {
       Log.d("login error", e.getMessage());
@@ -211,12 +218,62 @@ public class Linphone extends CordovaPlugin {
     }
    });
    return true;
+  }else if (action.equals("getRemoteContact")) { 
+
+   cordova.getThreadPool().execute(new Runnable() {
+    public void run() {
+     try {
+      getRemoteContact(callbackContext);
+
+     } catch (Exception e) {
+      Log.d("login error", e.getMessage());
+     }
+    }
+   });
+   return true;
   }
   return false;
  }
 
- public static synchronized void login(final String username, final String password, final String domain, final CallbackContext callbackContext) {
+
+ 
+ public static synchronized void login(final String username, final String password, final String domain, final String transport, final CallbackContext callbackContext) {
   try {
+	  
+	  Transports transports = mLinphoneManager.getLc().getSignalingTransportPorts();
+			
+			transports.udp = 0;
+			transports.tls = 0;
+			transports.tcp = 5090;
+			
+			
+	  	  
+	    if(transport.equals("tcp")){
+		  
+			transports.udp = 0;
+			transports.tls = 0;
+			transports.tcp = 5090;
+		  
+			Log.e("Usando tcp !!!!!!!!!!");
+		  
+		}else if (transport.equals("udp")){
+			
+			transports.udp = 5070;
+			transports.tls = 0;
+			transports.tcp = 0;
+			
+			Log.e("Usando udp !!!!!!!!!!");
+			
+		}else if (transport.equals("tls")){
+			
+			transports.udp = 0;
+			transports.tls = 5080;
+			transports.tcp = 0;
+			
+			Log.e("Usando tls !!!!!!!!!!");
+		}
+		
+		mLinphoneManager.getLc().setSignalingTransportPorts(transports);
 
 
    mLinphoneManager.login(username, password, domain, callbackContext); // callbackContext.success(); // Thread-safe.
@@ -339,6 +396,20 @@ public class Linphone extends CordovaPlugin {
    Log.d("Update Register");
    mLinphoneManager.getLc().refreshRegisters();
    callbackContext.success();
+  } catch (Exception e) {
+   Log.d("Update Error", e.getMessage());
+   callbackContext.error(e.getMessage());
+  }
+ }
+ 
+ 
+ public static synchronized void getRemoteContact (final CallbackContext callbackContext) {
+  try {
+   Log.d("Get Remote Contact");
+   LinphoneCall call =  mLinphoneManager.getLc().getCurrentCall();
+   mLinphoneManager.getLc().refreshRegisters();
+   callbackContext.success(call.getRemoteContact());
+   //callbackContext.success();
   } catch (Exception e) {
    Log.d("Update Error", e.getMessage());
    callbackContext.error(e.getMessage());
