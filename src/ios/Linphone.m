@@ -49,6 +49,9 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
         call = NULL;
     }
     if(cstate == LinphoneCallConnected){
+	linphone_call_enable_echo_cancellation(call, true);
+        linphone_call_enable_echo_limiter(call, true);
+	    
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Connected"];
         [himself.commandDelegate sendPluginResult:pluginResult callbackId:callCallBackID];
     }
