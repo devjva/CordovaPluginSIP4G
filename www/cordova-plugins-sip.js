@@ -1,3 +1,4 @@
+cordova.define("cordova-plugin-sip.linphone", function(require, exports, module) {
 module.exports =
 {
     login: function (username, password, domain, transport, successCallback, errorCallback) {
@@ -118,3 +119,5 @@ module.exports =
         );
     }
 };
+
+});
