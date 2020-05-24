@@ -331,12 +331,12 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 			RegistrationState cstate, String smessage) {
 		if(cstate == RegistrationState.RegistrationOk)
 		{
-			mLoginCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"RegistrationSuccess"));
+			mLoginCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"RegistrationSuccess").setKeepCallback(true));
 
 		}
 		else if(cstate == RegistrationState.RegistrationFailed)
 		{
-			mLoginCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"RegistrationFailed"));
+			mLoginCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"RegistrationFailed").setKeepCallback(true));
 		}
 	}
 
