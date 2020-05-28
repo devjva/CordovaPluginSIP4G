@@ -325,18 +325,24 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 			boolean encrypted, String authenticationToken) {
 
 	}
+	
+	public PluginResult callbackteste(String message){
+		PluginResult result = new PluginResult(PluginResult.Status.OK, message);
+		result.setKeepCallback(true);
+		return result;
+	}
 
 	@Override
 	public void registrationState(LinphoneCore lc, LinphoneProxyConfig cfg,
 			RegistrationState cstate, String smessage) {
 		if(cstate == RegistrationState.RegistrationOk)
 		{
-			mLoginCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"RegistrationSuccess").setKeepCallback(true));
+			mLoginCallbackContext.sendPluginResult(callbackteste("RegistrationSuccess"));
 
 		}
 		else if(cstate == RegistrationState.RegistrationFailed)
 		{
-			mLoginCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"RegistrationFailed").setKeepCallback(true));
+			mLoginCallbackContext.sendPluginResult(callbackteste("RegistrationFailed"));
 		}
 	}
 
