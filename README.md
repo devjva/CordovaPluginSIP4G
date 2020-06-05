@@ -1,5 +1,5 @@
-# cordova-plugin-sip
-<h2>Based on https://github.com/sezerkorkmaz/cordova-plugin-sip</h2>
+# Based on https://github.com/sezerkorkmaz/cordova-plugin-sip
+<h3>cordova-plugin-sip</h3>
 
 
 
@@ -123,15 +123,3 @@ Update 1/2/2018 - Typescript definitions are partially implemented.  Will finish
     }
 }
 ```
-
-<h3>Contributing</h3>
-
-Fork it
-
-Create your feature branch (git checkout -b my-new-feature)
-
-Commit your changes (git commit -am 'Add some feature')
-
-Push to the branch (git push origin my-new-feature)
-
-Create new Pull Request
