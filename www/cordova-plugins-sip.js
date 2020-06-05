@@ -1,4 +1,3 @@
-cordova.define("cordova-plugin-sip.linphone", function(require, exports, module) {
 module.exports =
 {
     login: function (username, password, domain, transport, successCallback, errorCallback) {
@@ -73,13 +72,13 @@ module.exports =
             []
         );
     },
-    toggleSpeaker: function (successCallback, errorCallback) {
+    toggleSpeaker: function (enable, successCallback, errorCallback) {
         cordova.exec(
             successCallback,
             errorCallback,
             "Linphone",
             "toggleSpeaker",
-            []
+            [enable]
         );
     },
     toggleMute: function (successCallback, errorCallback) {
@@ -117,7 +116,14 @@ module.exports =
             "getRemoteContact",
             []
         );
+    },
+    setLowBandwidth: function (enable, successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            "Linphone",
+            "lowBandwidth",
+            [enable]
+        );
     }
 };
-
-});
