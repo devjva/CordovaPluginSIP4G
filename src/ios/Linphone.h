@@ -21,5 +21,9 @@
 - (void)toggleSpeaker:(CDVInvokedUrlCommand*)command;
 - (void)toggleMute:(CDVInvokedUrlCommand*)command;
 - (void)sendDtmf:(CDVInvokedUrlCommand*)command;
+- (void)setLowBandwidth:(CDVInvokedUrlCommand*)command;
+- (void)updateRegister:(CDVInvokedUrlCommand*)command;
+- (void)getRemoteContact:(CDVInvokedUrlCommand*)command;
+
 
 @end
