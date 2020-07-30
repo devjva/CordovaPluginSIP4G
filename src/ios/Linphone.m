@@ -10,7 +10,7 @@ static bool_t running=TRUE;
 NSString *loginCallBackID ;
 NSString *callCallBackID ;
 NSString *RemoteAddress ;
-static bool_t isspeaker=FALSE;
+static bool_t isspeaker=TRUE;
 static NSTimer *tListen;
 static Linphone *himself;
 
@@ -59,11 +59,14 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
         
         call = NULL;
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"End"];
-        [himself.commandDelegate sendPluginResult:pluginResult callbackId:callCallBackID];
-        isspeaker = FALSE;
+        
+        isspeaker = true;
         UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_None;
         AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute, sizeof(audioRouteOverride),
                                 &audioRouteOverride);
+        
+        [himself.commandDelegate sendPluginResult:pluginResult callbackId:callCallBackID];
+      
         
     }
     if(cstate == LinphoneCallIncomingReceived){
