@@ -120,6 +120,16 @@ public class Linphone extends CordovaPlugin  {
                 lowBandwidth(args.getString(0), callbackContext);
 				} catch (Exception e) {Log.d("lowBandwidth error", e.getMessage());}}});
 		  return true;}
+		  else if (action.equals("setMicrophoneVolumeGain")){
+			    cordova.getThreadPool().execute(new Runnable() {public void run() {try { 
+                setMicrophoneVolumeGain(args.getString(0), callbackContext);
+				} catch (Exception e) {Log.d("setMicrophoneVolumeGain error", e.getMessage());}}});
+		  return true;}
+		  else if (action.equals("setMicGainDb")){
+			    cordova.getThreadPool().execute(new Runnable() {public void run() {try { 
+                setMicGainDb(args.getString(0), callbackContext);
+				} catch (Exception e) {Log.d("setMicGainDb error", e.getMessage());}}});
+		  return true;}
 		  
         
         return false;
@@ -288,9 +298,49 @@ public class Linphone extends CordovaPlugin  {
 				 callbackContext.success((mLinphoneManager.setLowBandwidth(false))  ? "true" : "false");
 			}	  
 	  } catch (Exception e) {
-	   Log.d("Update Error", e.getMessage());
+	   Log.d("lowBandwidth Error", e.getMessage());
 	   callbackContext.error(e.getMessage());
 	  }
 	}
+	
+	
+	public static synchronized void setPlaybackGainDb (final String value, final CallbackContext callbackContext) {
+	  try {
+		  
+		  mLinphoneManager.setPlaybackGainDb(value);
+		  callbackContext.success("ok");
+			
+	  } catch (Exception e) {
+	   Log.d("setPlaybackGainDb Error", e.getMessage());
+	   callbackContext.error(e.getMessage());
+	  }
+	}
+
+	public static synchronized void setMicGainDb (final String value, final CallbackContext callbackContext) {
+	  try {
+		  
+		  mLinphoneManager.setMicGainDb(value);
+		  callbackContext.success("ok");
+			
+	  } catch (Exception e) {
+	   Log.d("setMicGainDb Error", e.getMessage());
+	   callbackContext.error(e.getMessage());
+	  }
+	}
+	
+	
+	public static synchronized void setMicrophoneVolumeGain(final String value, final CallbackContext callbackContext) {
+	  try {
+		  
+		  mLinphoneManager.setMicrophoneVolumeGain(value);
+		  callbackContext.success("ok");
+			
+	  } catch (Exception e) {
+	   Log.d("setMicrophoneVolumeGain Error", e.getMessage());
+	   callbackContext.error(e.getMessage());
+	  }
+	}
+	
+	
 	
 }
