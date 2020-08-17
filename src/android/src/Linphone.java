@@ -130,6 +130,11 @@ public class Linphone extends CordovaPlugin  {
                 setMicGainDb(args.getString(0), callbackContext);
 				} catch (Exception e) {Log.d("setMicGainDb error", e.getMessage());}}});
 		  return true;}
+		  else if (action.equals("setPlaybackGainDb")){
+			    cordova.getThreadPool().execute(new Runnable() {public void run() {try { 
+                setPlaybackGainDb(args.getString(0), callbackContext);
+				} catch (Exception e) {Log.d("setMicGainDb error", e.getMessage());}}});
+		  return true;}
 		  
         
         return false;
