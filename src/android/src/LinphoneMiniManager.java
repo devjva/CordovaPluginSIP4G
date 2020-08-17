@@ -231,6 +231,41 @@ public class LinphoneMiniManager implements CoreListener {
 		}
 		
 	}
+	
+	public boolean setPlaybackGainDb(String value){
+		
+	 try{
+			
+		  mCore.setPlaybackGainDb(Float.parseFloat(value));
+				return true;	
+		}catch (Exception e){
+				android.util.Log.d(TAG, "setPlaybackGainDb " + e.toString());	
+				return false;				
+	    }
+	}
+	public boolean setMicGainDb(String value){
+		
+	 try{
+			
+		  mCore.setMicGainDb(Float.parseFloat(value));
+				return true;	
+		}catch (Exception e){
+				android.util.Log.d(TAG, "setMicGain " + e.toString());	
+				return false;				
+	    }
+	}
+	
+	public boolean setMicrophoneVolumeGain(String value){
+		
+	 try{
+
+		   mCore.getCurrentCall().setMicrophoneVolumeGain(((Float.parseFloat(value))/100));
+				return true;	
+		}catch (Exception e){
+				android.util.Log.d(TAG, "setMicrophoneVolumeGain " + e.toString());	
+				return false;				
+	    }
+	}
 
 
     public void terminateCall() {
@@ -258,7 +293,7 @@ public class LinphoneMiniManager implements CoreListener {
 			audioManager.setMode(AudioManager.MODE_NORMAL);			
 		    audioManager.setSpeakerphoneOn(true);
 		}else{
-			audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+			audioManager.setMode(AudioManager.MODE_NORMAL);
 			audioManager.setSpeakerphoneOn(false);
 		}
 		
@@ -359,6 +394,8 @@ public class LinphoneMiniManager implements CoreListener {
 
 		mCore.enableEchoCancellation(true);
 		mCore.enableEchoLimiter(true);
+		
+		
 
 	}
 
@@ -373,7 +410,7 @@ public class LinphoneMiniManager implements CoreListener {
 
 	public PluginResult callbacCustom(String message){
 			PluginResult result = new PluginResult(PluginResult.Status.OK, message);
-			result.setKeepCallback(true);
+			//result.setKeepCallback(true);
 			return result;
 		}
 	@Override
@@ -393,6 +430,7 @@ public class LinphoneMiniManager implements CoreListener {
 	public void onCallStateChanged(Core core, Call call, State state, String s) {
 		if(state == State.Connected)
 		{
+			
 			mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Connected"));
 		}
 		else if(state == State.IncomingReceived)
@@ -408,6 +446,8 @@ public class LinphoneMiniManager implements CoreListener {
 			mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"Error"));
 		}
 		Log.d("Call state: " + state + "(" + s + ")");
+		
+		
 
 	}
 
