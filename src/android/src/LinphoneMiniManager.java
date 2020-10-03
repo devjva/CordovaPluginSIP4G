@@ -2,17 +2,14 @@ package com.sip.linphone;
 /*
 LinphoneMiniManager.java
 Copyright (C) 2014  Belledonne Communications, Grenoble, France
-
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
-
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -105,7 +102,7 @@ public class LinphoneMiniManager implements CoreListener {
 			mCore.addListener(this);
 			mCaptureView = new SurfaceView(mContext);
 			mCore.start();
-			toggleEnableSpeaker(true);
+			
 		} catch (IOException e) {
 			Log.e(new Object[]{"Error initializing Linphone",e.getMessage()});
 
@@ -290,8 +287,13 @@ public class LinphoneMiniManager implements CoreListener {
 		final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 					
 		if(speaker){
-			audioManager.setMode(AudioManager.MODE_NORMAL);			
+			audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);			
 		    audioManager.setSpeakerphoneOn(true);
+			
+			
+			/*int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);
+			audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);*/
+			
 		}else{
 			audioManager.setMode(AudioManager.MODE_NORMAL);
 			audioManager.setSpeakerphoneOn(false);
@@ -430,7 +432,7 @@ public class LinphoneMiniManager implements CoreListener {
 	public void onCallStateChanged(Core core, Call call, State state, String s) {
 		if(state == State.Connected)
 		{
-			
+			toggleEnableSpeaker(true);			
 			mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Connected"));
 		}
 		else if(state == State.IncomingReceived)
@@ -439,10 +441,12 @@ public class LinphoneMiniManager implements CoreListener {
 		}
 		else if(state == State.End)
 		{
+			toggleEnableSpeaker(false);
 			mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"End"));
 		}
 		else if(state == State.Error)
 		{
+			toggleEnableSpeaker(false);
 			mCallbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK,"Error"));
 		}
 		Log.d("Call state: " + state + "(" + s + ")");
@@ -487,7 +491,6 @@ public class LinphoneMiniManager implements CoreListener {
 	
 	/*@Override
 	public void  onMessageSent(Core core, ChatRoom chatRoom){
-
 	}*/
 	
 	@Override
@@ -632,5 +635,3 @@ public class LinphoneMiniManager implements CoreListener {
 
 	}
 }
-
-
