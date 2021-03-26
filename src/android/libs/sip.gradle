@@ -1,12 +1,12 @@
 repositories{    
   jcenter()
-  flatDir {
-      dirs 'libs'
-   }
+	maven {
+				url "http://linphone.org/releases/maven_repository"
+			}
 }
 
 dependencies {
-   compile(name:'linphone-sdk-android', ext:'aar')
+     classpath 'com.android.tools.build:gradle:4.3+'
 }
 
 android {
