@@ -6,7 +6,7 @@ repositories{
 }
 
 dependencies {
-     classpath 'com.android.tools.build:gradle:4.3+'
+     classpath 'org.linphone:linphone-sdk-android:4.5+'
 }
 
 android {
