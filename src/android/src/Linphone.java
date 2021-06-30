@@ -134,8 +134,7 @@ public class Linphone extends CordovaPlugin  {
 			    cordova.getThreadPool().execute(new Runnable() {public void run() {try { 
                 setPlaybackGainDb(args.getString(0), callbackContext);
 				} catch (Exception e) {Log.d("setMicGainDb error", e.getMessage());}}});
-		  return true;}
-		  
+		  return true;}	  
         
         return false;
     }
@@ -293,6 +292,7 @@ public class Linphone extends CordovaPlugin  {
 	   callbackContext.error(e.getMessage());
 	  }
 	}	
+
 	
 	public static synchronized void lowBandwidth (final String isActive, final CallbackContext callbackContext) {
 	  try {
