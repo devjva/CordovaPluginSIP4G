@@ -1,5 +1,8 @@
+cordova.define("cordova-plugin-sip.linphone", function(require, exports, module) {
 module.exports =
 {
+	
+	
     login: function (username, password, domain, transport, successCallback, errorCallback) {
         cordova.exec(
             successCallback,
@@ -125,32 +128,6 @@ module.exports =
             "lowBandwidth",
             [enable]
         );
-    },
-    setMicrophoneVolumeGain: function (value, successCallback, errorCallback) {
-        cordova.exec(
-            successCallback,
-            errorCallback,
-            "Linphone",
-            "setMicrophoneVolumeGain",
-            [value]
-        );
-    },
-    setMicGainDb: function (value, successCallback, errorCallback) {
-        cordova.exec(
-            successCallback,
-            errorCallback,
-            "Linphone",
-            "setMicGainDb",
-            [value]
-        );
-    },
-    setPlaybackGainDb: function (value, successCallback, errorCallback) {
-        cordova.exec(
-            successCallback,
-            errorCallback,
-            "Linphone",
-            "setPlaybackGainDb",
-            [value]
-        );
     }
 };
+});
