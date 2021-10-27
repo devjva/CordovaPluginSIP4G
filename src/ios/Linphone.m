@@ -146,32 +146,32 @@ static void call_state_changed(LinphoneCore *lc, LinphoneCall *call, LinphoneCal
         }
         
        //linphone_core_set_dns_servers(lc, bctbx_list_t);
-        
-        
-        LinphoneProxyConfig *proxy_cfg = linphone_core_create_proxy_config(lc);
-        LinphoneAddress *from = linphone_address_new(identity);
-        
-        /*create authentication structure from identity*/
-        LinphoneAuthInfo *info=linphone_auth_info_new(linphone_address_get_username(from),NULL,(char*)[password UTF8String],NULL,(char*)[domain UTF8String],(char*)[domain UTF8String]);
-        linphone_core_add_auth_info(lc,info); /*add authentication info to LinphoneCore*/
-        linphone_auth_info_set_algorithm(info,(char*)[@"md5" UTF8String]);
-
-        // configure proxy entries
-        linphone_proxy_config_set_identity(proxy_cfg,identity); /*set identity with user name and domain*/
-        const char* server_addr = (char*)[domain UTF8String]; /*extract domain address from identity*/
-        linphone_proxy_config_set_server_addr(proxy_cfg,server_addr); /* we assume domain = proxy server address*/
-        linphone_proxy_config_enable_register(proxy_cfg,TRUE); /*activate registration for this proxy config*/
-        linphone_address_destroy(from); /*release resource*/
-        linphone_core_add_proxy_config(lc,proxy_cfg); /*add proxy config to linphone core*/
-        linphone_core_set_default_proxy(lc,proxy_cfg); /*set to default proxy*/
-        
-        LCSipTransports transport;
-        linphone_core_get_sip_transports(lc, &transport);
-        transport.tls_port = 0;
-        transport.tcp_port = 5090;
-        transport.udp_port = 0;
-        
-        linphone_core_set_sip_transports(lc, &transport);
+         LinphoneProxyConfig *proxy_cfg = linphone_core_create_proxy_config(lc);
+  LinphoneAddress *from = linphone_address_new(identity);
+  
+  /*create authentication structure from identity*/
+  LinphoneAuthInfo *info=linphone_auth_info_new(linphone_address_get_username(from),NULL,(char*)[password UTF8String],NULL,(char*)[domain UTF8String],(char*)[domain UTF8String]);
+  linphone_auth_info_set_algorithm(info,(char*)[@"md5" UTF8String]);
+  linphone_core_add_auth_info(lc,info); /*add authentication info to LinphoneCore*/
+  
+  // configure proxy entries
+LinphoneAddress *address = linphone_core_interpret_url(lc, identity);
+//linphone_address_set_port(address,9060);
+linphone_proxy_config_set_identity_address(proxy_cfg,address); /*set identity with user name and domain*/
+  const char* server_addr = (char*)[domain UTF8String]; /*extract domain address from identity*/
+  linphone_proxy_config_set_server_addr(proxy_cfg,server_addr); /* we assume domain = proxy server address*/
+  linphone_proxy_config_enable_register(proxy_cfg,TRUE); /*activate registration for this proxy config*/
+  linphone_address_destroy(from); /*release resource*/
+  linphone_core_add_proxy_config(lc,proxy_cfg); /*add proxy config to linphone core*/
+linphone_core_set_default_proxy_config(lc,proxy_cfg); /*set to default proxy*/
+  
+  LCSipTransports transport;
+  linphone_core_get_sip_transports(lc, &transport);
+  transport.tls_port = 0;
+  transport.tcp_port = LC_SIP_TRANSPORT_RANDOM;
+  transport.udp_port = LC_SIP_TRANSPORT_RANDOM;
+  
+  linphone_core_set_sip_transports(lc, &transport);
         
         /* main loop for receiving notifications and doing background linphonecore work: */
         
