@@ -74,25 +74,10 @@
         <config>
             <source url="https://gitlab.linphone.org/BC/public/podspec.git"/>
         </config>
-        <pods use-frameworks="true">
+        <pods use-frameworks="false">
             <pod name="linphone-sdk/basic-frameworks" spec="~>  4.5" />
         </pods>
-    </podspec>
-    
-    <framework src="AVFoundation.framework" />
-    <framework src="AudioToolbox.framework" />
-    <framework src="CoreFoundation.framework" />
-    <framework src="CoreMedia.framework" />
-    <framework src="CoreData.framework" />
-    <framework src="CoreAudio.framework" />
-    <framework src="libz.tbd" />
-    <framework src="libsqlite3.tbd" />
-    <framework src="libresolv.tbd" />
-    <framework src="libxml2.tbd" />
-    <framework src="libstdc++.6.0.9.tbd" />
-    <framework src="libstdc++.6.tbd" />
-    <framework src="libstdc++.tbd" />
-    <framework src="libc++abi.tbd" />
+    </podspec>   
 
     <js-module src="www/cordova-plugins-sip.js" name="linphone">
       <merges target="cordova.plugins.sip" />
