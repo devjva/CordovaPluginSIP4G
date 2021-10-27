@@ -70,65 +70,14 @@
     </config-file>
     <header-file src="src/ios/Linphone.h"/>
     <source-file src="src/ios/Linphone.m"/>
-
-    <header-file src="src/ios/libs/apple-darwin/include/" />
-
-
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/mediastreamer/plugins/libmsamr.a" target-dir="lib/mediastreamer/plugins" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/mediastreamer/plugins/libmsbcg729.a" target-dir="lib/mediastreamer/plugins" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/mediastreamer/plugins/libmsopenh264.a" target-dir="lib/mediastreamer/plugins" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/mediastreamer/plugins/libmssilk.a" target-dir="lib/mediastreamer/plugins" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/mediastreamer/plugins/libmswebrtc.a" target-dir="lib/mediastreamer/plugins" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/mediastreamer/plugins/libmsx264.a" target-dir="lib/mediastreamer/plugins" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libantlr3c.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libavcodec.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libavutil.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libbcg729.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libbctoolbox.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libbellesip.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libbzrtp.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libcorec.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libcunit.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libebml2.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libgsm.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/liblinphone.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/liblinphonetester.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libmatroska2.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libmediastreamer_base.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libmediastreamer_voip.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libopencore-amrnb.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libopencore-amrwb.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libopenh264.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libopus.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libortp.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libpolarssl.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libspeex.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libspeexdsp.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libsrtp.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libswresample.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libswscale.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libtunnel.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libvo-amrwbenc.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libvpx.a" target-dir="lib" />
-    <source-file framework="true" src="src/ios/libs/apple-darwin/lib/libx264.a" target-dir="lib" />
-
-    <source-file src="src/ios/libs/apple-darwin/share/" />
-
-
-    <framework src="AVFoundation.framework" />
-    <framework src="AudioToolbox.framework" />
-    <framework src="CoreFoundation.framework" />
-    <framework src="CoreMedia.framework" />
-    <framework src="CoreData.framework" />
-    <framework src="CoreAudio.framework" />
-    <framework src="libz.tbd" />
-    <framework src="libsqlite3.tbd" />
-    <framework src="libresolv.tbd" />
-    <framework src="libxml2.tbd" />
-    <framework src="libstdc++.6.0.9.tbd" />
-    <framework src="libstdc++.6.tbd" />
-    <framework src="libstdc++.tbd" />
-    <framework src="libc++abi.tbd" />
+    <podspec>
+        <config>
+            <source url="https://gitlab.linphone.org/BC/public/podspec.git"/>
+        </config>
+        <pods use-frameworks="true">
+            <pod name="linphone-sdk/basic-frameworks" spec="~>  4.5" />
+        </pods>
+    </podspec>
 
     <js-module src="www/cordova-plugins-sip.js" name="linphone">
       <merges target="cordova.plugins.sip" />
